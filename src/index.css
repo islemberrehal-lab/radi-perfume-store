@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #0B0B0C;
+    --gold: #C9A66B;
+    --ivory: #F5EFE6;
+  }
+
+  body {
+    background-color: #0B0B0C;
+    color: #F5EFE6;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom subtle gold scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0B0C;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272A;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A66B;
+  }
+}
+
+/* Glass effect utilities */
+.glass-card {
+  background: rgba(19, 19, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 166, 107, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(201, 166, 107, 0.45);
+  box-shadow: 0 0 25px rgba(201, 166, 107, 0.12);
+}
+
+.glass-panel {
+  background: rgba(16, 16, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 166, 107, 0.18);
+}
+
+/* Gold shimmer gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F9F5EC 0%, #C9A66B 50%, #9E7D47 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-light {
+  background: linear-gradient(135deg, #FFF9F0 0%, #E8D3B1 50%, #C9A66B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Soft gold glow button */
+.btn-gold {
+  background: linear-gradient(135deg, #D4B076 0%, #C9A66B 50%, #A88344 100%);
+  color: #0B0B0C;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(201, 166, 107, 0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #E2C28C 0%, #D4B076 50%, #B89251 100%);
+  box-shadow: 0 6px 28px rgba(201, 166, 107, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gold-outline {
+  border: 1px solid rgba(201, 166, 107, 0.5);
+  color: #F5EFE6;
+  background: rgba(201, 166, 107, 0.05);
+  transition: all 0.3s ease;
+}
+
+.btn-gold-outline:hover {
+  border-color: #C9A66B;
+  background: rgba(201, 166, 107, 0.15);
+  box-shadow: 0 0 15px rgba(201, 166, 107, 0.2);
+}
+
+/* RTL layout adjustments */
+[dir="rtl"] {
+  font-family: 'Cairo', 'Amiri', 'Inter', sans-serif;
+}
+
+[dir="rtl"] .font-serif {
+  font-family: 'Amiri', 'Cairo', serif;
+}
