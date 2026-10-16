@@ -19,6 +19,15 @@ import { TRANSLATIONS } from './data/translations';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 export default function App() {
+  // Theme State with localStorage persistence (Default: 'noir-gold', supports 'radi-fragrance', etc.)
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    try {
+      return localStorage.getItem('luxe_theme') || 'noir-gold';
+    } catch {
+      return 'noir-gold';
+    }
+  });
+
   // Multilingual State: 'fr' | 'ar' | 'en'
   const [lang, setLang] = useState('fr');
 
@@ -59,6 +68,16 @@ export default function App() {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }, [lang]);
+
+  // Synchronize data-theme on <html> for CSS variable themes
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    try {
+      localStorage.setItem('luxe_theme', currentTheme);
+    } catch (e) {
+      // Ignore
+    }
+  }, [currentTheme]);
 
   // Persist cart to localStorage
   useEffect(() => {
@@ -178,9 +197,9 @@ export default function App() {
   const wishlistProducts = PRODUCTS.filter((p) => wishlist.includes(p.id));
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] text-[#F5EFE6] flex flex-col font-sans selection:bg-[#C9A66B]/30 selection:text-[#F5EFE6]">
+    <div className="min-h-screen bg-background text-ivory flex flex-col font-sans transition-colors duration-300">
       
-      {/* Sticky Luxury Navbar */}
+      {/* Sticky Luxury Navbar with Theme Switcher */}
       <Navbar
         currentView={currentView}
         onNavigate={handleNavigate}
@@ -193,10 +212,12 @@ export default function App() {
         onLanguageChange={setLang}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        currentTheme={currentTheme}
+        onThemeChange={setCurrentTheme}
       />
 
       {/* Main Content Router */}
-      <main className="flex-1">
+      <main className="flex-1 pb-16 lg:pb-0">
         {currentView === 'home' ? (
           <>
             {/* Hero Section */}
